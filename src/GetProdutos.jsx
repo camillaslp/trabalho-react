@@ -1,51 +1,50 @@
 import React from "react";
 import axios from "axios";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 class GetProdutos extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            produtos: [],
-        };
+  constructor(props) {
+    super(props);
+    this.state = {
+      produtos: [],
+    };
 
-        this.api = axios.create({
-            baseURL: "http://localhost:9090"
-        });
-    }
+    this.api = axios.create({
+      baseURL: "http://localhost:9090"
+    });
+  }
 
-    componentDidMount() {
-        const processar = (response) => {
-            let novo = { produtos: response.data };
-            this.setState(novo);
-        };
-        this.api.get("/produtos").then(processar);
+  componentDidMount() {
+    const processar = (response) => {
+      let novo = { produtos: response.data };
+      this.setState(novo);
+    };
+    this.api.get("/produtos").then(processar);
 
-        document.title = "E-commerce Grupo 5";
-    }
+    document.title = "E-commerce Grupo 5";
+  }
 
-    render() {
-        return (
-            <div>
-                <h3>Produtos</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Nome do Produto</th>
-                            <th>Valor</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.state.produtos.map((produto) => (
-                            <tr key={produto.id_produto}>
-                                <td>{produto.nome}</td>
-                                <td>{"R$" + produto.valorUnitario}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
-        );
-    }
+  render() {
+    return (
+      <div>
+        <h3>Produtos</h3>
+        <Container>
+          <Row>
+            <Col>Nome do Produto</Col>
+            <Col>Valor</Col>
+          </Row>
+          {this.state.produtos.map((produto) => (
+            <Row key={produto.id_produto}>
+              <Col>{produto.nome}</Col>
+              <Col>{produto.valorUnitario}</Col>
+            </Row>
+          ))}
+        </Container>
+      </div>
+    );
+  }
 }
 
 export default GetProdutos;

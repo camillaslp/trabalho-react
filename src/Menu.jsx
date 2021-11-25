@@ -4,7 +4,7 @@ import Nav from "react-bootstrap/Nav";
 
 function Menu() {
   return (
-    <Navbar fixed="top" expand="lg" bg="dark" variant="dark">
+    <Navbar sticky="top" expand="lg" bg="dark" variant="dark">
       <Container>
         <Navbar.Brand href="./PaginaInicial">
           <img
@@ -24,7 +24,7 @@ function Menu() {
       <Navbar fixed="bottom" expand="lg" bg="dark" variant="dark">
         <Container>
           <Navbar.Brand href="./Sobre">
-            Sobre nós
+            Sobre
           </Navbar.Brand>
         </Container>
       </Navbar>
