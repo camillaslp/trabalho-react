@@ -1,47 +1,37 @@
 import React from "react";
-import axios from "axios";
-import { Container } from "react-bootstrap";
-import { Row } from "react-bootstrap";
-import { Col } from "react-bootstrap";
+import Api from "./Api";
 
-function Carrinho() {
-    const [pedidos, setPedidos] = React.useState([]);
-    const api = axios.create({
-        baseURL: "http://localhost:9090"
-    });
+export default (props) => {
+    const [pedidosItem, setPedidosItem] = React.useState([]);
 
-    const consultar = () => {
-        const processar = (response) => {
-            let novo = response.data;
-            setPedidos(novo);
-        };
-        api.get("/pedidos").then(processar);
+    React.useEffect(() => { chamadaAPI() }, [])
+
+    const chamadaAPI = (props) => {
+
+        Api.get(`/pedidos`).then((result) => {
+
+            if (result.data?.length > 0) {
+                const existe = result.data.find((pedido) => pedido.cliente?.id == 1);
+                if (existe) {
+                    setPedidosItem(existe.pedidosItem);
+                }
+            }
+        })
+
     };
-
-    React.useEffect(consultar, []);
 
     return (
         <div className="App-header">
-            <Container>
-                <header>
-                    <p>E-commerce | Grupo5 | Serratec</p>
-                </header>
-                <p></p>
-                <Row>
-                    <Col>Numero do Pedido</Col>
-                    <Col>Produto</Col>
-                    <Col>Valor Total</Col>
-                </Row>
-                {pedidos.map((pedido) => (
-                    <Row key={pedido.id_pedido}>
-                        <Col>{pedido.id_pedido}</Col>
-                        <Col>{pedido.pedidosItem}</Col>
-                        <Col>{pedido.totalGeral}</Col>
-                    </Row>
-                ))}
-            </Container>
-        </div >
-    );
+            {pedidosItem.length > 0 && <h3>Itens no carrinho: {pedidosItem.length}</h3>}
+            {pedidosItem.length == 0 && <h3>Seu carrinho está vazio</h3>}
+            <div className="carrinho">
+                <p>Produtos: </p>
+                <ul>
+                    {pedidosItem.map((pedidoItem) => (
+                        <li key={pedidoItem.id}>Nome do produto: {pedidoItem.produto.nome} - Preço R$ {pedidoItem.produto.valor}</li>
+                    ))}
+                </ul>
+            </div>
+        </div>
+    )
 }
-
-export default Carrinho;
