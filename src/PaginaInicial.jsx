@@ -1,9 +1,7 @@
-import React from "react";
 import axios from "axios";
+import React from "react";
+import { Col, Container, Row } from "react-bootstrap";
 import Produtos from "./Produtos";
-import { Container } from "react-bootstrap";
-import { Row } from "react-bootstrap";
-import { Col } from "react-bootstrap";
 
 export default () => {
   const [produtos, setProdutos] = React.useState([]);
@@ -20,7 +18,7 @@ export default () => {
     }
   };
 
-  React.useEffect(() => { chamadaAPI() }, [])
+  React.useEffect(() => { chamadaAPI() }, [produtos])
 
   return (
     <div className="App-header">
@@ -32,6 +30,9 @@ export default () => {
         <Row>
           <Col>Nome do produto</Col>
           <Col>Valor</Col>
+          <Col></Col>
+          <Col></Col>
+          <p></p>
         </Row>
       </Container>
       <Container>

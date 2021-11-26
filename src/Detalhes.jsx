@@ -7,12 +7,8 @@ import { Row } from "react-bootstrap";
 import { Col } from "react-bootstrap";
 
 export default (props) => {
-    const {id} = useParams();
+    const { id } = useParams();
     const [produto, setProduto] = React.useState({});
-
-    function buscar() {
-
-    }
 
     Api.get(`/produtos/${id}`).then(exibir);
 
@@ -20,30 +16,30 @@ export default (props) => {
         setProduto(response.data);
     }
 
-    function comprar () {
+    function comprar() {
         function adicionarPedidoItem(idLista) {
-            Api.post('/pedidoitens', {
+            Api.post('/pedidosItem', {
                 "pedido": {
-                    "id":idLista
+                    "id": idLista
                 },
                 "produto": {
-                    "id":id
+                    "id": id
                 },
                 "quantidade": 1
             })
-        } 
+        }
 
-        Api.get(`/pedidos`).then((result)=> {
+        Api.get(`/pedidos`).then((result) => {
 
             if (result.data?.length > 0) {
                 const pedidoEncontrado = result.data.find((x) => x.cliente?.id == 1);
 
                 if (!pedidoEncontrado) {
                     Api.post("/pedidos", {
-                        "cliente":{
-                            "id":1
+                        "cliente": {
+                            "id": 1
                         }
-                    }).then((newPedido)=> {
+                    }).then((newPedido) => {
                         adicionarPedidoItem(newPedido.data.id);
                     });
                 } else {
@@ -52,6 +48,9 @@ export default (props) => {
             }
         });
     }
+
+    function retorna() {
+    };
 
 
     return (
@@ -64,6 +63,8 @@ export default (props) => {
                     <Col>
                         <h2>{"Valor do Produto"}</h2>
                     </Col>
+                    <Col></Col>
+                    <Col></Col>
                 </Row>
             </Container>
             <Container>
@@ -72,10 +73,13 @@ export default (props) => {
                         <h3>{produto.nome}</h3>
                     </Col>
                     <Col>
-                        <h3>{produto.valor}</h3>
+                        <h3>{"R$ " + produto.valor}</h3>
                     </Col>
                     <Col>
                         <Link to='/carrinho'><button onClick={comprar}>Adicionar ao carrinho</button></Link>
+                    </Col>
+                    <Col>
+                        <Link to='/home'><button onClick={retorna}>Retornar</button></Link>
                     </Col>
                 </Row>
             </Container>
