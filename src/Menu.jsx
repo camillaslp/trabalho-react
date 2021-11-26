@@ -6,7 +6,7 @@ function Menu() {
   return (
     <Navbar sticky="top" expand="lg" bg="dark" variant="dark">
       <Container>
-        <Navbar.Brand href="./PaginaInicial">
+        <Navbar.Brand href="/">
           <img
             alt=""
             src="https://cdn-icons-png.flaticon.com/512/440/440692.png"
@@ -17,13 +17,13 @@ function Menu() {
           E-commerce Grupo 5
         </Navbar.Brand>
         <Nav className="me-auto">
-          <Nav.Link href="#features">Features</Nav.Link>
-          <Nav.Link href="./Carrinho">Carrinho</Nav.Link>
+          <Nav.Link href="./features">Produtos</Nav.Link>
+          <Nav.Link href="./carrinho">Carrinho</Nav.Link>
         </Nav>
       </Container>
       <Navbar fixed="bottom" expand="lg" bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand href="./Sobre">
+          <Navbar.Brand href="./sobre">
             Sobre
           </Navbar.Brand>
         </Container>

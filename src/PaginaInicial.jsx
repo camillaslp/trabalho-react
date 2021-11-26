@@ -3,8 +3,8 @@ import GetProdutos from "./GetProdutos"
 
 function PaginaInicial(props) {
   switch (props.menu) {
-    case "home":
-      return <Home />;
+    case "/":
+      return <PaginaInicial />;
       break;
     case "cadastro":
       return <Formulario />;

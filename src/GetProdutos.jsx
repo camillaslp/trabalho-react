@@ -25,12 +25,14 @@ class GetProdutos extends React.Component {
 
     document.title = "E-commerce Grupo 5";
   }
-
   render() {
     return (
-      <div>
-        <h3>Produtos</h3>
+      <div className="App-header">
         <Container>
+          <header>
+            <p>E-commerce | Grupo5 | Serratec</p>
+          </header>
+          <p></p>
           <Row>
             <Col>Nome do Produto</Col>
             <Col>Valor</Col>
