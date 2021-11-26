@@ -17,7 +17,6 @@ function Menu() {
           E-commerce Grupo 5
         </Navbar.Brand>
         <Nav className="me-auto">
-          <Nav.Link href="./features">Produtos</Nav.Link>
           <Nav.Link href="./carrinho">Carrinho</Nav.Link>
         </Nav>
       </Container>

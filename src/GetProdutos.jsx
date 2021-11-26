@@ -4,6 +4,8 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
+document.title = "E-commerce Grupo 5";
+
 class GetProdutos extends React.Component {
   constructor(props) {
     super(props);
@@ -23,8 +25,16 @@ class GetProdutos extends React.Component {
     };
     this.api.get("/produtos").then(processar);
 
-    document.title = "E-commerce Grupo 5";
-  }
+  };
+  
+  comprar = () => {
+    const processar = (response) => {
+      let novo = { produtos: response.data };
+      this.setState(novo);
+    };
+    this.api.post("/pedidos").then(this.api.post("/pedidositem").then(processar));
+  };
+
   render() {
     return (
       <div className="App-header">
@@ -41,6 +51,7 @@ class GetProdutos extends React.Component {
             <Row key={produto.id_produto}>
               <Col>{produto.nome}</Col>
               <Col>{produto.valorUnitario}</Col>
+              <Col><button onClick={this.comprar}>Adicionar ao Carrinho</button></Col>
             </Row>
           ))}
         </Container>

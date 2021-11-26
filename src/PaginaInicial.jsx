@@ -3,14 +3,15 @@ import GetProdutos from "./GetProdutos"
 
 function PaginaInicial(props) {
   switch (props.menu) {
+    case "/carrinho":
+      return <Carrinho />;
+      break;
+    case "/sobre":
+      return <Sobre />;
+      break;
     case "/":
       return <PaginaInicial />;
       break;
-    case "cadastro":
-      return <Formulario />;
-      break;
-    case "sobre":
-      return <Sobre />;
     default:
       return <GetProdutos />;
   }
